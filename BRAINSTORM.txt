@@ -1,14 +1,53 @@
-Project:  Time Search
+Project: Time Search
 
 Purpose:
-This utility acts as a quick search to find changes quickly.  This is to allow the most function with the least typing.
+This utility acts as a quick search to find recently modified files. It allows for the most functionality with the least typing.
 
 Features:
-- The script name is the time unit.  All that is required is a symbolic link to the main program, and it will be the time unit to use.
-Example:  
-* hours 6 : would search for everything 6 hours or newer
-* days 2 : would search for everything 2 days or newer
+1. Time-based search:
+   - The script name determines the time unit (hours or days).
+   - Symbolic links to the main program allow for easy time unit selection.
+   Example:  
+   * hours 6 : searches for files modified in the last 6 hours
+   * days 2 : searches for files modified in the last 2 days
 
+2. File Type Filtering:
+   - Use the -t or --type flag to filter by file type.
+   - Uses MIME types for accurate file type detection.
+   Examples:
+   * -t text : for text files
+   * -t image : for image files
+   * -t audio : for audio files
+   * -t video : for video files
+   * -t application : for various document types
+
+3. Verbose output:
+   - Use -v or --verbose flag for detailed information about the search process and results.
+
+4. Base directory listing:
+   - Use --base flag to list only the base directories containing changes.
+
+5. Depth limit:
+   - Use -d or --depth flag to set the maximum depth for recursive search.
+
+6. Flexible time units:
+   - Automatically handles both singular and plural time unit names (hour/hours, day/days).
+
+Implemented but not in README:
+- Depth limit feature
+
+Potential Future Enhancements:
+1. Support for additional time units (minutes, weeks, months).
+2. File size filtering.
+3. Exclude patterns for files or directories.
+4. Additional output formats (JSON, CSV).
+5. Search by creation time.
+6. Regular expression filtering for file names.
+7. Parallel processing for faster searches.
+8. Option to save search results to a file.
+9. Interactive mode for refining search criteria.
+10. Colored output for better readability.
+11. Options for handling symlinks during the search.
 
 - File Type Filtering:  What if you could specify the types of files you want to search for? Like, maybe you only want to see text files that have been modified, so you could add a flag like -t txt or something similar.
 * -t text file (using the file command to quickly determine the file type)
