@@ -41,7 +41,9 @@ def search_files(time_unit, value, file_type=None, verbose=False, base_only=Fals
                             file_mime = mime.from_file(file_path)
                             if file_type in file_mime:
                                 if base_only:
-                                    base_dirs.add(root.split(os.sep)[1])
+                                    base_dir = root.split(os.sep)[1] if len(root.split(os.sep)) > 1 else ''
+                                    if base_dir and base_dir not in ('.', '..'):
+                                        base_dirs.add(base_dir)
                                 else:
                                     print(file_path)
                                     if verbose:
@@ -52,7 +54,9 @@ def search_files(time_unit, value, file_type=None, verbose=False, base_only=Fals
                                 print(f"Warning: Unable to determine MIME type for {file_path}")
                     else:
                         if base_only:
-                            base_dirs.add(root.split(os.sep)[1])
+                            base_dir = root.split(os.sep)[1] if len(root.split(os.sep)) > 1 else ''
+                            if base_dir and base_dir not in ('.', '..'):
+                                base_dirs.add(base_dir)
                         else:
                             print(file_path)
                             if verbose:
@@ -63,8 +67,7 @@ def search_files(time_unit, value, file_type=None, verbose=False, base_only=Fals
 
     if base_only:
         for dir in sorted(base_dirs):
-            if dir:  # Avoid printing an empty string for the current directory
-                print(os.path.join('.', dir))
+            print(dir)
 
     if verbose:
         print("Search completed.")
