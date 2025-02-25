@@ -88,3 +88,7 @@ yarn-error.log
 # System files #
 ################
 .directory
+
+# Cursor specific
+.cursor/rules/*.mdc
+.cursor

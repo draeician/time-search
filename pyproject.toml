@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "time-search"
+version = "1.0.0"
+authors = [
+    { name = "Draeician", email = "draeician@gmail.com" },
+]
+description = "A Python package for time-based search functionality"
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = [
+    "python-dotenv",
+    "pytest",
+    "pytest-asyncio",
+    "aiohttp",
+    "asyncio",
+    "typing-extensions",
+    "pydantic"
+]
+
+[project.scripts]
+time-search = "time_search:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."] 
