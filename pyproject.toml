@@ -1,6 +1,6 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "time-search"
@@ -12,6 +12,7 @@ description = "A Python package for time-based search functionality"
 readme = "README.md"
 requires-python = ">=3.7"
 dependencies = [
+    "python-magic",
     "python-dotenv",
     "pytest",
     "pytest-asyncio",
@@ -22,7 +23,22 @@ dependencies = [
 ]
 
 [project.scripts]
-time-search = "time_search:main"
+time-search = "time_search.main:main"
+# Singular forms
+minute = "time_search.main:main"
+hour = "time_search.main:main"
+day = "time_search.main:main"
+week = "time_search.main:main"
+month = "time_search.main:main"
+year = "time_search.main:main"
+# Plural forms
+minutes = "time_search.main:main"
+hours = "time_search.main:main"
+days = "time_search.main:main"
+weeks = "time_search.main:main"
+months = "time_search.main:main"
+years = "time_search.main:main"
 
-[tool.hatch.build.targets.wheel]
-packages = ["."] 
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["time_search"] 
