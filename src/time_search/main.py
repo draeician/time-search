@@ -3,6 +3,7 @@
 import os
 import sys
 import argparse
+import signal
 from datetime import datetime, timedelta
 import magic  # For file type detection
 
@@ -76,23 +77,27 @@ def search_files(time_unit, value, file_type=None, verbose=False, base_only=Fals
         print("Search completed.")
 
 def main():
-    parser = argparse.ArgumentParser(description="Search for recently modified files.")
-    parser.add_argument('value', type=int, help="Time value")
-    parser.add_argument('-t', '--type', help="File type filter")
-    parser.add_argument('-v', '--verbose', action='store_true', help="Enable verbose output")
-    parser.add_argument("--base", action="store_true", help="List only base directories containing changes")
-    parser.add_argument('-d', '--depth', type=int, help="Maximum depth for recursive search")
-    args = parser.parse_args()
+    try:
+        parser = argparse.ArgumentParser(description="Search for recently modified files.")
+        parser.add_argument('value', type=int, help="Time value")
+        parser.add_argument('-t', '--type', help="File type filter")
+        parser.add_argument('-v', '--verbose', action='store_true', help="Enable verbose output")
+        parser.add_argument("--base", action="store_true", help="List only base directories containing changes")
+        parser.add_argument('-d', '--depth', type=int, help="Maximum depth for recursive search")
+        args = parser.parse_args()
 
-    # Default time unit is 'day' if the command is 'time-search'
-    time_unit = 'day'
-    
-    # Try to extract time unit from command name
-    cmd_name = os.path.basename(sys.argv[0])
-    if cmd_name != 'time-search':
-        time_unit = cmd_name.rstrip('s')
-    
-    search_files(time_unit, args.value, args.type, args.verbose, args.base, args.depth)
+        # Default time unit is 'day' if the command is 'time-search'
+        time_unit = 'day'
+        
+        # Try to extract time unit from command name
+        cmd_name = os.path.basename(sys.argv[0])
+        if cmd_name != 'time-search':
+            time_unit = cmd_name.rstrip('s')
+        
+        search_files(time_unit, args.value, args.type, args.verbose, args.base, args.depth)
+    except KeyboardInterrupt:
+        print("\nSearch interrupted by user. Exiting gracefully.")
+        sys.exit(0)
 
 if __name__ == "__main__":
     main() 
